@@ -6,7 +6,7 @@ export default function CountryList({cities, isLoading}) {
 
   const countries = cities.reduce((acc, cur) => {
     if(!acc.map(el => el.country).includes(cur.country)){
-      return [...acc, {emoji: cur.emoji, country: cur.country}]
+      return [...acc, {emoji: cur.emoji, country: cur.country, id: cur.id}]
     } else {
       return acc;
     }
@@ -19,7 +19,7 @@ export default function CountryList({cities, isLoading}) {
       {!isLoading && countries.length > 0 && (
         <ul className={styles.countryList}>
           {countries.map(country => (
-            <li key={country.id}><CountryItem country={country} /></li>
+            <CountryItem country={country} key={country.id} />
           ))}
         </ul>
       )}
