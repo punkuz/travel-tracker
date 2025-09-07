@@ -5,6 +5,8 @@ const CitiesContext = createContext();
 function CitiesProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [currentCity, setCurrentCity] = useState({}); 
+
   useEffect(function () {
     async function fetchCities() {
       setIsLoading(true);
@@ -17,9 +19,9 @@ function CitiesProvider({ children }) {
   }, []);
 
   //apply usememo
-  const value = useMemo(() => ({ cities, isLoading }), [cities, isLoading]);
+  const value = useMemo(() => ({ cities, isLoading, currentCity, setCurrentCity, setIsLoading }), [cities, isLoading, currentCity]);
 
   return <CitiesContext.Provider value={value}>{children}</CitiesContext.Provider>;
 }
 
-export { CitiesProvider, CitiesContext };
+export { CitiesContext, CitiesProvider };

@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 import Button from "../Button/Button";
 
-export function convertToEmoji(countryCode) {
-  const codePoints = countryCode
-    .toUpperCase()
-    .split("")
-    .map((char) => 127397 + char.charCodeAt());
-  return String.fromCodePoint(...codePoints);
-}
+// export function convertToEmoji(countryCode) {
+//   const codePoints = countryCode
+//     .toUpperCase()
+//     .split("")
+//     .map((char) => 127397 + char.charCodeAt());
+//   return String.fromCodePoint(...codePoints);
+// }
 
 function Form() {
   const [cityName, setCityName] = useState("");

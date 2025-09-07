@@ -1,5 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./City.module.css";
+import { useEffect } from "react";
+import { useCities } from "../../hooks/useCities";
+import Spinner from "../Spinner";
+import Button from "../Button/Button";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -10,18 +14,32 @@ const formatDate = (date) =>
   }).format(new Date(date));
 
 function City() {
-  // TEMP DATA
-  const currentCity = {
-    cityName: "Lisbon",
-    emoji: "🇵🇹",
-    date: "2027-10-31T15:59:59.138Z",
-    notes: "My favorite city so far!",
-  };
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const { currentCity, setCurrentCity, isLoading, setIsLoading } = useCities();
 
-  const x = useParams()
-    console.log(x);
+  useEffect(() => {
+    //fetch the city details with the id
+    async function fetchCityDetails() {
+      setIsLoading(true);
+      const data = await fetch(`http://localhost:8000/cities/${id}`);
+      const res = await data.json();
+      setCurrentCity(res);
+      setIsLoading(false);
+    }
+    fetchCityDetails();
+  }, [id, setCurrentCity]);
+  // TEMP DATA
+  // const currentCity = {
+  //   cityName: "Lisbon",
+  //   emoji: "🇵🇹",
+  //   date: "2027-10-31T15:59:59.138Z",
+  //   notes: "My favorite city so far!",
+  // };
 
   const { cityName, emoji, date, notes } = currentCity;
+
+  if (isLoading) return <Spinner />;
 
   return (
     <div className={styles.city}>
@@ -48,15 +66,23 @@ function City() {
         <h6>Learn more</h6>
         <a
           href={`https://en.wikipedia.org/wiki/${cityName}`}
-          target="_blank"
-          rel="noreferrer"
+          target='_blank'
+          rel='noreferrer'
         >
           Check out {cityName} on Wikipedia &rarr;
         </a>
       </div>
 
       <div>
-        
+        <Button
+          type='back'
+          onClick={(e) => {
+            e.preventDefault();
+            navigate(-1);
+          }}
+        >
+          &larr; Back
+        </Button>
       </div>
     </div>
   );
