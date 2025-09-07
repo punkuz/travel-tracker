@@ -1,9 +1,11 @@
+import { useCities } from '../../hooks/useCities';
 import Spinner from '../Spinner'
 import CountryItem from './CountryItem'
 import styles from './CountryList.module.css'
 
-export default function CountryList({cities, isLoading}) {
-
+export default function CountryList() {
+  //get cities and isLoading from context
+  const { cities, isLoading } = useCities();
   const countries = cities.reduce((acc, cur) => {
     if(!acc.map(el => el.country).includes(cur.country)){
       return [...acc, {emoji: cur.emoji, country: cur.country, id: cur.id}]
