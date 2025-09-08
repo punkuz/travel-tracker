@@ -19,7 +19,7 @@ function CitiesProvider({ children }) {
   }, []);
 
   //apply usememo
-  const value = useMemo(() => ({ cities, isLoading, currentCity, setCurrentCity, setIsLoading }), [cities, isLoading, currentCity]);
+  const value = useMemo(() => ({ cities, isLoading, currentCity, setCurrentCity, setIsLoading, setCities }), [cities, isLoading, currentCity]);
 
   return <CitiesContext.Provider value={value}>{children}</CitiesContext.Provider>;
 }

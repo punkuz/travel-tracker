@@ -25,16 +25,52 @@
       "id": 17806751
     },
     {
-      "cityName": "Berlin",
+      "cityName": "Cremlingen",
       "country": "Germany",
-      "emoji": "🇩🇪",
-      "date": "2027-02-12T09:24:11.863Z",
-      "notes": "Amazing 😃",
+      "date": "2025-09-08T11:37:19.000Z",
       "position": {
-        "lat": 52.53586782505711,
-        "lng": 13.376933665713324
+        "lat": "52.278241126812276",
+        "lng": "10.7061767578125"
       },
-      "id": 98443197
+      "emoji": "🇩🇪",
+      "notes": "test",
+      "id": 98443198
+    },
+    {
+      "cityName": "Birganj",
+      "country": "Nepal",
+      "date": "2025-09-08T11:46:55.850Z",
+      "position": {
+        "lat": "27.009584680125165",
+        "lng": "84.87281799316408"
+      },
+      "emoji": "🇳🇵",
+      "notes": "hel",
+      "id": 98443202
+    },
+    {
+      "cityName": "Pheta",
+      "country": "Nepal",
+      "date": "2025-09-08T11:48:26.852Z",
+      "position": {
+        "lat": "26.98511187825209",
+        "lng": "84.93736267089845"
+      },
+      "emoji": "🇳🇵",
+      "notes": "g",
+      "id": 98443203
+    },
+    {
+      "cityName": "Kalaiya",
+      "country": "Nepal",
+      "date": "2025-09-08T12:14:02.475Z",
+      "position": {
+        "lat": "26.945026170092685",
+        "lng": "84.98714447021486"
+      },
+      "emoji": "🇳🇵",
+      "notes": "sekuwa",
+      "id": 98443204
     }
   ]
 }

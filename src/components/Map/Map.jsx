@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap, useMapEvents } from "react-leaflet";
 
-import { useCities } from "../hooks/useCities";
+import { useCities } from "../../hooks/useCities";
 import styles from "./Map.module.css";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useUrl } from "../../hooks/useUrl";
 
 export default function WorldMap() {
-  const [position, setPosition] = useState([51.505, -0.09]);
-  const [searchParams] = useSearchParams();
-  const lat = searchParams.get("lat");
-  const lng = searchParams.get("lng");
+  const [position, setPosition] = useState([27.0095, 84.87]);
+  const { lat, lng } = useUrl();
   const { cities } = useCities();
   useEffect(() => {
     if (lat && lng) {
@@ -51,9 +50,25 @@ function ChangeCenter({position}) {
 function DetectClick() {
   const navigate = useNavigate();
   const map = useMap();
-  map.on("click", (e) => {
-    const { lat, lng } = e.latlng;
-    navigate(`form?lat=${lat}&lng=${lng}`);
-  });
+
+  // map.on("click", (e) => {
+  //     const { lat, lng } = e.latlng;
+  //     navigate(`form?lat=${lat}&lng=${lng}`);
+  //   });
+  // another way using mapevents
+  // useMapEvents({
+  //   click(e) {
+  //     const { lat, lng } = e.latlng;
+  //     navigate(`form?lat=${lat}&lng=${lng}`);
+  //   },
+  // });
+  
+  useEffect(() => {
+    map.on("click", (e) => {
+      const { lat, lng } = e.latlng;
+      navigate(`form?lat=${lat}&lng=${lng}`);
+    });
+  }, [map, navigate]);
+  
   return null;
 }
