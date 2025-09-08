@@ -1,7 +1,6 @@
-import { Link } from 'react-router-dom';
-import styles from './CityItem.module.css'
-import { useCities } from '../../hooks/useCities';
-import { deleteCity } from '../../utils/operations';
+import { Link } from "react-router-dom";
+import styles from "./CityItem.module.css";
+import { useCities } from "../../hooks/useCities";
 
 const formatDate = (date) =>
   new Intl.DateTimeFormat("en", {
@@ -10,18 +9,37 @@ const formatDate = (date) =>
     year: "numeric",
   }).format(new Date(date));
 
-export default function CityItem({city}) {
-  const {currentCity, setCities} = useCities()
-  const { emoji, cityName, date, id, position: {lat, lng} } = city;
+export default function CityItem({ city }) {
+  const { currentCity, deleteCity } = useCities();
+  const {
+    emoji,
+    cityName,
+    date,
+    id,
+    position: { lat, lng },
+  } = city;
 
   return (
     <li>
-      <Link to={`${id}?lat=${lat}&lng=${lng}`} className={`${styles.cityItem} ${currentCity.id === id ? styles['cityItem--active'] : ""}`}>
-      <span className={styles.emoji}>{emoji}</span>
-      <h3 className={styles.name}>{cityName}</h3>
-      <time className={styles.date}>{formatDate(date)}</time>
-      <button className={styles.deleteBtn} onClick={(e) => deleteCity(e, id, setCities)}>&times;</button>
+      <Link
+        to={`${id}?lat=${lat}&lng=${lng}`}
+        className={`${styles.cityItem} ${
+          currentCity.id === id ? styles["cityItem--active"] : ""
+        }`}
+      >
+        <span className={styles.emoji}>{emoji}</span>
+        <h3 className={styles.name}>{cityName}</h3>
+        <time className={styles.date}>{formatDate(date)}</time>
+        <button
+          className={styles.deleteBtn}
+          onClick={(e) => {
+            e.preventDefault();
+            deleteCity(id);
+          }}
+        >
+          &times;
+        </button>
       </Link>
     </li>
-  )
+  );
 }

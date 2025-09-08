@@ -16,26 +16,15 @@ const formatDate = (date) =>
 function City() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { currentCity, setCurrentCity, isLoading, setIsLoading } = useCities();
+  const { currentCity, getCity, isLoading } = useCities();
 
-  useEffect(() => {
+  useEffect(
     //fetch the city details with the id
-    async function fetchCityDetails() {
-      setIsLoading(true);
-      const data = await fetch(`http://localhost:8000/cities/${id}`);
-      const res = await data.json();
-      setCurrentCity(res);
-      setIsLoading(false);
-    }
-    fetchCityDetails();
-  }, [id, setCurrentCity]);
-  // TEMP DATA
-  // const currentCity = {
-  //   cityName: "Lisbon",
-  //   emoji: "🇵🇹",
-  //   date: "2027-10-31T15:59:59.138Z",
-  //   notes: "My favorite city so far!",
-  // };
+    function () {
+      getCity(id);
+    },
+    [id]
+  );
 
   const { cityName, emoji, date, notes } = currentCity;
 

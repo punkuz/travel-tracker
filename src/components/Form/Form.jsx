@@ -10,7 +10,6 @@ import styles from "./Form.module.css";
 import Button from "../Button/Button";
 import { useUrl } from "../../hooks/useUrl";
 import { useCities } from "../../hooks/useCities";
-import { postCity } from "../../utils/operations";
 
 function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -21,7 +20,7 @@ function convertToEmoji(countryCode) {
 }
 
 function Form() {
-  const { setCities } = useCities();
+  const { createCity } = useCities();
   const { lat, lng } = useUrl();
   const [emoji, setEmoji] = useState("");
   const [cityName, setCityName] = useState("");
@@ -58,7 +57,7 @@ function Form() {
       emoji,
       notes,
     };
-    await postCity(newCity, setCities);
+    await createCity(newCity);
     navigate(`/app-layout`); //redirect to the city details page
   }
 
