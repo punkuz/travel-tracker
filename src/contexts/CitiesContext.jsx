@@ -52,8 +52,6 @@ function CitiesProvider({ children }) {
 
   async function getCity(id) {
     if (Number(id) === currentCity.id) return;
-    console.log("fetching city", id);
-    console.log("current city", currentCity.id);
     dispatch({ type: "data/loading" });
     try {
       const res = await fetch(`${BASE_URL}/cities/${id}`);
